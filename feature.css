@@ -1,0 +1,78 @@
+body{
+    background-color: rgb(178, 159, 196);
+}
+
+h1{
+    font-size: 50px;
+    height: 100px;
+    width: 300px;
+
+    font-weight: bold;
+    font-weight: 300px;
+letter-spacing: 2px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-align: center;
+    justify-content: center;
+    color: black ;
+    text-shadow: 2px 2px 3px blueviolet,-2px -2px 3px yellow;
+    margin-top: 20px;
+    border-radius: 20px;
+    border: 2px solid black;
+    background-color:pink;
+align-self: center;
+margin-left: 600px;
+animation: rashi 2s ease-in 0s infinite alternate ;
+margin-top: 10px;
+border-radius: 50%;
+align-content: center;
+}
+
+@keyframes rashi {
+from {
+    background-color: blueviolet;
+    font-size: 30px;
+}
+}
+.li{
+    font-weight: bold;
+    font-size: 20px;
+
+}
+p{
+    font-size: 15px;
+    letter-spacing: 1.5px;
+    margin-left: 20px;
+}
+li{
+    font-size: 20px;
+}
+div{
+    /* border: 2px solid black; */
+    height: 900px;
+    width: 600px;
+    
+}
+img{
+    float: right;
+    height: 500px;
+    width: 600px;
+    margin-right: 150px;
+    margin-top: 50px;
+    /* border-radius: 50%; */
+    position: relative;
+    transform-style: preserve-3d;
+    transform: perspective(1000px);
+    animation: rotate 10s linear infinite;
+    border: 2px solid violet;
+}
+@keyframes rotate{
+    0%{
+        transform: perspective(1000px) rotateY(0deg);
+    }
+    100%{
+        transform: perspective(1000px) rotateY(360deg);
+    }
+}
+img:hover{
+   animation:rotate 3s linear 2; ;
+}

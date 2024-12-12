@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .chat-container {
+            width: 400px;
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .chatbox {
+            width: 100%;
+            height: 300px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+        }
+        .input-container {
+            display: flex;
+        }
+        input {
+            width: 80%;
+            padding: 10px;
+            margin-right: 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        button {
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .message {
+            margin-bottom: 10px;
+        }
+        .bot-message {
+            background-color: #f1f1f1;
+            padding: 8px;
+            border-radius: 4px;
+            max-width: 75%;
+        }
+        .user-message {
+            background-color: #007BFF;
+            color: white;
+            padding: 8px;
+            border-radius: 4px;
+            max-width: 75%;
+            text-align: right;
+            margin-left: auto;
+        }
+    </style>
+</head>
+<body>
+
+<div class="chat-container">
+    <div class="chatbox" id="chatbox"></div>
+    <div class="input-container">
+        <input type="text" id="userInput" placeholder="Type your message...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+<script>
+    const API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyASJwGpN4RAATwy0I5q927TfkWrhEmTySU";
+    
+    // Function to display messages in the chatbox
+    function displayMessage(content, sender) {
+        const chatbox = document.getElementById("chatbox");
+        const messageDiv = document.createElement("div");
+        messageDiv.classList.add("message");
+        
+        const messageContent = document.createElement("div");
+        messageContent.textContent = content;
+        
+        if (sender === 'bot') {
+            messageContent.classList.add("bot-message");
+        } else {
+            messageContent.classList.add("user-message");
+        }
+
+        messageDiv.appendChild(messageContent);
+        chatbox.appendChild(messageDiv);
+        chatbox.scrollTop = chatbox.scrollHeight;  // Scroll to the bottom
+    }
+
+    // Function to handle user input
+    function sendMessage() {
+        const userInput = document.getElementById("userInput").value.trim();
+        if (userInput === "") return;
+
+        displayMessage(userInput, 'user');
+        document.getElementById("userInput").value = "";  // Clear the input box
+
+        // Simulate response if user inputs common phrases
+        if (userInput.toLowerCase().includes("hi") || userInput.toLowerCase().includes("hello") || userInput.toLowerCase().includes("hey")) {
+            displayMessage("Hello! How can I help you today?", 'bot');
+        } else if (userInput.toLowerCase().includes("what is your name")) {
+            displayMessage("I am a simple chatbot, here to assist you!", 'bot');
+        } else if (userInput.toLowerCase().includes("how are you")) {
+            displayMessage("I am just a bot, but I'm here to help you!", 'bot');
+        } else {
+            generateResponse(userInput);
+        }
+    }
+
+    // Function to call the API and get a response
+    function generateResponse(userMessage) {
+        const jsonPayload = JSON.stringify({
+            "contents": [{
+                "parts": [{
+                    "text": userMessage
+                }]
+            }]
+        });
+
+        fetch(API_URL, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: jsonPayload
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                displayMessage("Sorry, I couldn't process your request.", 'bot');
+            } else {
+                const candidatesNode = data.candidates;
+                if (candidatesNode && candidatesNode.length > 0) {
+                    const responseText = candidatesNode[0].content.parts[0].text;
+                    displayMessage(responseText, 'bot');
+                } else {
+                    displayMessage("Sorry, I couldn't understand your request.", 'bot');
+                }
+            }
+        })
+        .catch(error => {
+            displayMessage("Error: Could not connect to the API.", 'bot');
+        });
+    }
+</script>
+
+</body>
+</html>

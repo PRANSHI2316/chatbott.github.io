@@ -1,0 +1,50 @@
+
+body{
+    background-color: rgb(178, 159, 196);
+}
+h1{
+    font-size: 50px;
+    height: 100px;
+    width: 300px;
+
+    font-weight: bold;
+    font-weight: 300px;
+    letter-spacing: 2px;
+    font-family:'Courier New', Courier, monospace;
+    text-align: center;
+    justify-content: center;
+    color: black ;
+    text-shadow: 2px 2px 3px blueviolet,-2px -2px 3px yellow;
+    margin-top: 20px;
+    border-radius: 20px;
+    border: 2px solod black;
+    background-color:pink;
+    align-self: center;
+    margin-left: 600px;
+    animation: rashi 2s ease-in 0s infinite alternate ;
+}
+
+@keyframes rashi{
+from {
+    background-color: blueviolet;
+    font-size: 30px;
+}
+
+}
+.contact{
+    border: 4px solid black;
+    height: 70px;
+    width: 200px;
+    margin-left: 650px;
+    text-align: center;
+    line-height: 20px
+}
+img{
+    height: 500px;
+    width: 600px;
+    margin-left:480px ;
+    mix-blend-mode:color-burn ;
+    border-radius: 30%;
+    border: 4px solid plum;
+}
+

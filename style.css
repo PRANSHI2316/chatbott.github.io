@@ -1,0 +1,67 @@
+#video{
+      width: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin-left: 350px;
+}
+body{
+    background-color: black;
+}
+button {
+    padding: 15px 30px;
+    font-size: 20px;
+    font-family: 'Arial', sans-serif;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
+/* Styling the special button */
+.special-button {
+    background: linear-gradient(45deg, #ff7e5f, #feb47b);  /* Gradient background */
+    color: white;
+    border-radius: 50px;  /* Rounded corners */
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    transform: scale(1);  /* Initial scale for hover effect */
+}
+
+.special-button:before {
+    content: '';
+    position: absolute;
+    top: -150%;
+    left: -150%;
+    width: 300%;
+    height: 300%;
+    background: #fff;
+    opacity: 0.2;
+    transition: all 0.4s ease;
+    border-radius: 50%;
+}
+
+.special-button:hover {
+    transform: scale(1.1);  /* Button slightly enlarges on hover */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);  /* Increase shadow on hover */
+}
+
+.special-button:hover:before {
+    top: -50%;
+    left: -50%;
+}
+
+.special-button:active {
+    transform: scale(0.95);  /* Slight shrink when pressed */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.special-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 126, 95, 0.6);  /* Focus ring effect */
+}
